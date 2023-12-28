@@ -1,0 +1,23 @@
+-----------INFO BD MYSQL
+=====ROOT
+user: root
+password:  root1234
+
+=====CREATE DATABASE
+CREATE DATABASE example_database;
+
+=====CREATE USER
+CREATE USER 'example_user'@'%' IDENTIFIED BY 'password';
+GRANT ALL ON example_database.* TO 'example_user'@'%';
+
+========CREATE TABLE
+CREATE TABLE example_database.todo_list (
+	item_id INT AUTO_INCREMENT,
+	content VARCHAR(255),
+	PRIMARY KEY(item_id)
+);
+
+=========INSERT INTO
+INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+
+======SELECT 
