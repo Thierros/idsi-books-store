@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
 
 
 # Create your views here.
@@ -15,7 +16,7 @@ def signup(request):
     if request.user.is_authenticated: # if current user is authenticated then redirect to home /
         return redirect('/')
     if request.method == 'POST': # create user via post method
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -24,9 +25,11 @@ def signup(request):
             login(request, user)
             return redirect('/')
         else:
+            # print(form)
             return render(request, 'signup.html', {'form': form})
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
+        # print(form)
         return render(request, 'signup.html', {'form': form})
 
 # signout or logout

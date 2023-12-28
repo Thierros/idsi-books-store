@@ -3,18 +3,218 @@
 {% block title %}SignUp{% endblock %}
 
 {% block content %}
-<h2>Sign Up</h2>
-<form method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-    <p>
-        {{ field.label_tag }} <br>
-        {{ field }}
-        {% for error in field.errors %}
-            <p style="color: red;">{{ error }}</p>
-        {% endfor %}
-    </p>
-    {% endfor %}
-    <button type="submit" class="btn btn-success">Sign up</button>
-</form>
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+    
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">NiceAdmin</span>
+                </a>
+              </div><!-- End Logo -->
+    
+              <div class="card mb-3">
+    
+                <div class="card-body">
+    
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
+                  </div>
+    
+                  <form method="POST" class="row g-3 needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label for="id_first_name">First name:</label>
+                        <input type="text" name="first_name" class="form-control" maxlength="150" id="id_first_name" required>
+                      <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <label for="id_last_name">Last name:</label>
+                        <input type="text" name="last_name" class="form-control" maxlength="150" id="id_last_name" required>
+                      <div class="invalid-feedback">Please, enter your name!</div>
+                    </div>
+    
+                    
+                    <div class="col-12">
+                      <label for="id_email" class="form-label">Email:</label>
+                      <input type="email" name="email" class="form-control"  maxlength="254" required id="id_email">
+                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    </div>
+    
+                    <!-- <div class="col-12">
+                        <label for="id_username">Username:</label>
+                        <input type="text" name="username" class="form-control" maxlength="150" id="id_username" utocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                      <div class="invalid-feedback">Please, enter your name!</div>
+                    </div> -->
+    
+                        
+                    <div class="col-12">
+                      <label for="id_username" class="form-label">Username:</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" name="username" class="form-control" maxlength="150" id="id_username" utocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                        <div class="invalid-feedback">Please choose a username.</div>
+                      </div>
+                    </div>
+    
+    
+                    <div class="col-12">
+                      <label for="id_password1" class="form-label">Password:</label>
+                      <input type="password" name="password1" class="form-control" id="id_password1" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+    
+                    <div class="col-12">
+                        <label for="id_password2" class="form-label">Password confirmation:</label>
+                        <input type="password" name="password2" class="form-control" id="id_password2" required>
+                        <div class="invalid-feedback">Please enter your password!</div>
+                      </div>
+    
+    
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" name="is_student" type="checkbox" value="" id="id_is_student" required>
+                        <label class="form-check-label" for="id_is_student">Is student:</label>
+                      </div>
+                    </div>
+    
+                    <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" name="is_teacher" type="checkbox" value="" id="id_is_teacher" required>
+                          <label class="form-check-label" for="id_is_teacher">Is teacher:</label>
+                        </div>
+                      </div>
+    
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                    </div>
+    
+                    <div class="col-12">
+                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                    </div>
+                  </form>
+    
+                </div>
+              </div>
+    
+              <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+    
+    </section>
 {% endblock %}
+
+<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+          <div class="d-flex justify-content-center py-4">
+            <a href="index.html" class="logo d-flex align-items-center w-auto">
+              <img src="assets/img/logo.png" alt="">
+              <span class="d-none d-lg-block">NiceAdmin</span>
+            </a>
+          </div><!-- End Logo -->
+
+          <div class="card mb-3">
+
+            <div class="card-body">
+
+              <div class="pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                <p class="text-center small">Enter your personal details to create account</p>
+              </div>
+
+              <form method="POST" class="row g-3 needs-validation" novalidate>
+                <div class="col-12">
+                    <label for="id_first_name">First name:</label>
+                    <input type="text" name="first_name" class="form-control" maxlength="150" id="id_first_name" required>
+                  <div class="invalid-feedback">Please, enter your name!</div>
+                </div>
+                
+                <div class="col-12">
+                    <label for="id_last_name">Last name:</label>
+                    <input type="text" name="last_name" class="form-control" maxlength="150" id="id_last_name" required>
+                  <div class="invalid-feedback">Please, enter your name!</div>
+                </div>
+
+                
+                <div class="col-12">
+                  <label for="id_email" class="form-label">Email:</label>
+                  <input type="email" name="email" class="form-control"  maxlength="254" required id="id_email">
+                  <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                </div>
+
+                <!-- <div class="col-12">
+                    <label for="id_username">Username:</label>
+                    <input type="text" name="username" class="form-control" maxlength="150" id="id_username" utocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                  <div class="invalid-feedback">Please, enter your name!</div>
+                </div> -->
+
+                    
+                <div class="col-12">
+                  <label for="id_username" class="form-label">Username:</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" name="username" class="form-control" maxlength="150" id="id_username" utocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                    <div class="invalid-feedback">Please choose a username.</div>
+                  </div>
+                </div>
+
+
+                <div class="col-12">
+                  <label for="id_password1" class="form-label">Password:</label>
+                  <input type="password" name="password1" class="form-control" id="id_password1" required>
+                  <div class="invalid-feedback">Please enter your password!</div>
+                </div>
+
+                <div class="col-12">
+                    <label for="id_password2" class="form-label">Password confirmation:</label>
+                    <input type="password" name="password2" class="form-control" id="id_password2" required>
+                    <div class="invalid-feedback">Please enter your password!</div>
+                  </div>
+
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" name="is_student" type="checkbox" value="" id="id_is_student" required>
+                    <label class="form-check-label" for="id_is_student">Is student:</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" name="is_teacher" type="checkbox" value="" id="id_is_teacher" required>
+                      <label class="form-check-label" for="id_is_teacher">Is teacher:</label>
+                    </div>
+                  </div>
+
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                </div>
+
+                <div class="col-12">
+                  <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+</section>
