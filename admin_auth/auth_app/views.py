@@ -47,13 +47,15 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('/profile')
+            return redirect('/')
         else:
             msg = 'Error Login'
             form = AuthenticationForm(request.POST)
+            # print(form)
             return render(request, 'login.html', {'form': form, 'msg': msg})
     else:
         form = AuthenticationForm()
+        # print(form)
         return render(request, 'login.html', {'form': form})
 
 # profile
