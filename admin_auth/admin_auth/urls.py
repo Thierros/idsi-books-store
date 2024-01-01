@@ -24,5 +24,16 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signout/', views.signout, name='signout'),
     path('signin/', views.signin, name='signin'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('create/author/', views.authorCreate, name='author_creation'),
+    path('create/book/', views.bookCreate, name='book_creation'),
+    path('create/domaine/', views.domaineCreate, name='domaine_creation'),
+    path('create/examplaire/', views.examplaireCreate, name='examplaire_creation'),
+    path('create/editeur/', views.editeurCreate, name='editeur_creation'),
+    path('create/edition/', views.editionCreate, name='edition_creation'),
+    path('create/emprunt/', views.empruntCreate, name='emprunt_creation'),
+    path('create/remise/', views.remiseCreate, name='remise_creation'),
+    path('create/classe/', views.classeCreate, name='classe_creation'),
+    path('create/ecue/', views.ecueCreate, name='ecue_creation')
+    # path('create/student/', views.studentCreate, name='student_creation')
 ]

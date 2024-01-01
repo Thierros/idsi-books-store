@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, AuteurForm
 
 
 # Create your views here.
@@ -62,3 +62,68 @@ def signin(request):
 @login_required(login_url='/signin/')
 def profile(request):
     return render(request, 'profile.html')
+
+# create author
+def authorCreate(request):
+    model_name = 'author'
+
+    if request.method == 'POST':
+        form = AuteurForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')  # Redirect to a success page
+    else:
+        form = AuteurForm()
+
+    return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
+
+
+# create book
+def bookCreate(request):
+    model_name = 'book'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create domaine
+def domaineCreate(request):
+    model_name = 'domaine'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create examplaire
+def examplaireCreate(request):
+    model_name = 'examplaire'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create author
+def editeurCreate(request):
+    model_name = 'editeur'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create edition
+def editionCreate(request):
+    model_name = 'edition'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create emprunt
+def empruntCreate(request):
+    model_name = 'emprunt'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create remise
+def remiseCreate(request):
+    model_name = 'remise'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create classe
+def classeCreate(request):
+    model_name = 'classe'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create autecuehor
+def ecueCreate(request):
+    model_name = 'ecue'
+    return render(request, 'form_creation.html', {'model_name': model_name})
+
+# create author
+def authorCreate(request):
+    model_name = 'author'
+    return render(request, 'form_creation.html', {'model_name': model_name})
