@@ -37,3 +37,4 @@ urlpatterns = [
     path('create/ecue/', views.ecueCreate, name='ecue_creation')
     # path('create/student/', views.studentCreate, name='student_creation')
 ]
+    

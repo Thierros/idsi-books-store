@@ -88,3 +88,6 @@ INSERT INTO example_database.todo_list (content) VALUES ("My first important ite
         <a href="/signup" class="btn btn-success">signup</a>
     {% endif %}
 {% endblock %}
+
+----- CRUD EMPLOYE EXAMPLE --
+https://www.javatpoint.com/django-crud-application

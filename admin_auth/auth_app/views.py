@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, AuteurForm
+from .forms import CustomUserCreationForm, AuteurForm, DomaineForm, EditeurForm, ClasseForm
 
 
 # Create your views here.
@@ -17,6 +17,7 @@ def signup(request):
         return redirect('/')
     if request.method == 'POST': # create user via post method
         form = CustomUserCreationForm(request.POST)
+        # print("form if:", form)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -29,7 +30,7 @@ def signup(request):
             return render(request, 'signup.html', {'form': form})
     else:
         form = CustomUserCreationForm()
-        # print(form)
+        # print("form else:", form)
         return render(request, 'signup.html', {'form': form})
 
 # signout or logout
@@ -66,15 +67,18 @@ def profile(request):
 # create author
 def authorCreate(request):
     model_name = 'author'
-
     if request.method == 'POST':
         form = AuteurForm(request.POST)
+        # print("form if:", form)
         if form.is_valid():
-            form.save()
-            return redirect('/')  # Redirect to a success page
+            try:
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except:
+                pass
     else:
         form = AuteurForm()
-
+        # print("form else:", form)
     return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
 
 
@@ -86,7 +90,17 @@ def bookCreate(request):
 # create domaine
 def domaineCreate(request):
     model_name = 'domaine'
-    return render(request, 'form_creation.html', {'model_name': model_name})
+    if request.method == 'POST':
+        form = DomaineForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except:
+                pass
+    else:
+        form = DomaineForm()
+    return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
 
 # create examplaire
 def examplaireCreate(request):
@@ -96,7 +110,17 @@ def examplaireCreate(request):
 # create author
 def editeurCreate(request):
     model_name = 'editeur'
-    return render(request, 'form_creation.html', {'model_name': model_name})
+    if request.method == 'POST':
+        form = EditeurForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except:
+                pass
+    else:
+        form = EditeurForm()
+    return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
 
 # create edition
 def editionCreate(request):
@@ -116,14 +140,19 @@ def remiseCreate(request):
 # create classe
 def classeCreate(request):
     model_name = 'classe'
-    return render(request, 'form_creation.html', {'model_name': model_name})
+    if request.method == 'POST':
+        form = ClasseForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except:
+                pass
+    else:
+        form = ClasseForm()
+    return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
 
 # create autecuehor
 def ecueCreate(request):
     model_name = 'ecue'
-    return render(request, 'form_creation.html', {'model_name': model_name})
-
-# create author
-def authorCreate(request):
-    model_name = 'author'
     return render(request, 'form_creation.html', {'model_name': model_name})
