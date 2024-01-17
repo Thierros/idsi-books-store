@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, AuteurForm, DomaineForm, EditeurForm, ClasseForm
+from .forms import CustomUserCreationForm, AuteurForm, DomaineForm, EditeurForm, ClasseForm, ECUEForm
+from .models import ECUE, Classe
 
 
 # Create your views here.
@@ -152,7 +153,21 @@ def classeCreate(request):
         form = ClasseForm()
     return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
 
-# create autecuehor
+# create ecue
 def ecueCreate(request):
     model_name = 'ecue'
-    return render(request, 'form_creation.html', {'model_name': model_name})
+    classe_data = Classe.objects.all()
+    if request.method == 'POST':
+        form = ECUEForm(request.POST)
+        if form.is_valid():
+            print(form)
+            try:
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        else:
+            print(form.errors)
+    else:
+        form = ECUEForm()
+    return render(request, 'form_creation.html', {'form': form, 'model_name': model_name, 'classe': classe_data})
