@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
 class LivreForm(forms.ModelForm):
     class Meta:
         model = Livre
-        fields = ('title', 'isbn', 'publication_date', 'language', 'nb_page', 'prix_unitaire', 'Qte_stock', 'domaine_id')
+        fields = ('title', 'isbn', 'publication_date', 'language', 'nb_page', 'prix_unitaire', 'Qte_stock', 'domaine_id', 'image')
 
 # auteur creation form
 class AuteurForm(forms.ModelForm):
