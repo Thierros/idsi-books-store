@@ -21,11 +21,11 @@ class Domaine(models.Model):
     domaine_name = models.CharField(max_length=255)
 
 # filee name function
-def filepath(request, filename):
-    old_filename = filename
-    time_now = datetime.now().strftime("%Y%m%d%H:%M:%S")
-    filename = "%s%s"%(time_now,old_filename)
-    return os.path.join("media/livre_images/", filename)
+# def filepath(request, filename):
+#     old_filename = filename
+#     time_now = datetime.now().strftime("%Y%m%d%H:%M:%S")
+#     filename = "%s%s"%(time_now,old_filename)
+#     return os.path.join("media/livre_images/", filename)
 
 class Livre(models.Model):
     livre_id = models.AutoField(primary_key=True)

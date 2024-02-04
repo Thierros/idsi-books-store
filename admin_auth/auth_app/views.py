@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, AuteurForm, DomaineForm, EditeurForm, ClasseForm, ECUEForm, LivreForm
-from .models import ECUE, Classe, Domaine
+from .forms import CustomUserCreationForm, AuteurForm, DomaineForm, EditeurForm, ClasseForm, ECUEForm, LivreForm, ExemplaireForm
+from .models import ECUE, Classe, Domaine, Livre, Auteur, Editeur
 
 
 # Create your views here.
@@ -92,8 +92,6 @@ def bookCreate(request):
         if form.is_valid():
             try:
                 form.image = request.FILES.get("image")
-                print(form.image)
-                print(form)
                 form.save()
                 return redirect('/')  # Redirect to a success page
             except Exception as e:
@@ -115,8 +113,8 @@ def domaineCreate(request):
             try:
                 form.save()
                 return redirect('/')  # Redirect to a success page
-            except:
-                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
     else:
         form = DomaineForm()
     return render(request, 'form_creation.html', {'form': form, 'model_name': model_name})
@@ -124,7 +122,22 @@ def domaineCreate(request):
 # create examplaire
 def examplaireCreate(request):
     model_name = 'examplaire'
-    return render(request, 'form_creation.html', {'model_name': model_name})
+    livres = Livre.objects.all()
+    editeurs = Editeur.objects.all()
+    if request.method == 'POST':
+        form = ExemplaireForm(request.POST)
+        if form.is_valid():
+            try:
+                print("saving")
+                form.save()
+                return redirect('/')  # Redirect to a success page
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        else:
+             print(form.errors)
+    else:
+        form = ExemplaireForm()
+    return render(request, 'form_creation.html', {'model_name': model_name, 'livres': livres, 'editeurs': editeurs})
 
 # create author
 def editeurCreate(request):

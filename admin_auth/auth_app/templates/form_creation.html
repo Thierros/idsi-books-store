@@ -90,7 +90,7 @@
 
             </div>
           </div>
-
+          <!-- done -->
           {% elif model_name == 'book' %}
           <div class="card">
             <div class="card-body">
@@ -161,7 +161,7 @@
                           {% endfor %}
                       </select>
                   </div>
-              </div>
+                </div>
                 <!-- image -->
                 <div class="row mb-3">
                   <label for="image_id" class="col-sm-2 col-form-label">Image du livre:</label>
@@ -185,58 +185,74 @@
               <h5 class="card-title">Nouvel examplaire</h5>
 
               <!-- Horizontal Form -->
-              <form method="POST">
+              <form method="POST" action="{% url 'examplaire_creation' %}" >
+                {% csrf_token %}
+                <!-- numero exemplaire -->
                 <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Your Name</label>
+                  <label for="num_exemplaire_id" class="col-sm-2 col-form-label">Numero exemplaire</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputText">
+                    <input type="number" class="form-control" id="num_exemplaire_id" name="exemplaire_number">
                   </div>
                 </div>
+                <!-- numero de l'edition -->
                 <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                  <label for="num_edition_id" class="col-sm-2 col-form-label">numero de l'edition</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail">
+                    <input type="number" class="form-control" id="num_edition_id" name="edition_number">
                   </div>
                 </div>
+                <!-- etat -->
                 <div class="row mb-3">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                  <label for="etat_id" class="col-sm-2 col-form-label">Etat:</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input type="text" class="form-control" id="etat_id", name="etat">
                   </div>
                 </div>
+
+                <!-- disponible -->
                 <fieldset class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                  <legend class="col-form-label col-sm-2 pt-0"></legend>
                   <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                      <label class="form-check-label" for="gridRadios1">
-                        First radio
-                      </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="gridRadios1" value="option1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            disponible
+                        </label>
                     </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                      <label class="form-check-label" for="gridRadios2">
-                        Second radio
-                      </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="gridRadios2" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Indisponible
+                        </label>
                     </div>
-                    <div class="form-check disabled">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                      <label class="form-check-label" for="gridRadios3">
-                        Third disabled radio
-                      </label>
-                    </div>
-                  </div>
+                </div>
+                
                 </fieldset>
+                
+                <!-- livre -->
                 <div class="row mb-3">
-                  <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Example checkbox
-                      </label>
-                    </div>
+                  <label class="col-sm-2 col-form-label">Livre:</label>
+                  <div class="col-sm-10">
+                      <select class="form-select" name="livre_id" aria-label="Default select example"required id="id_classe_id">
+                        {% for l in livres %}
+                                <option value="{{ l.livre_id }}">{{ l.title }}</option>
+                          {% endfor %}
+                      </select>
                   </div>
                 </div>
+
+                <!-- editeur -->
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Editeur:</label>
+                  <div class="col-sm-10">
+                      <select class="form-select" name="editeur_id" aria-label="Default select example"required id="id_classe_id">
+                        {% for e in editeurs %}
+                                <option value="{{ e.editeur_id }}">{{ e.editeur_name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                </div>
+
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
