@@ -1,0 +1,71 @@
+{% extends 'admin_template.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Data Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Data</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+            <!-- livres -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Liste des Livres</h5>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      <b>Titre</b>
+                    </th>
+                    <th>ISBN</th>
+                    <th>Langue</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
+                    <th>Nb pages</th>
+                    <th>Prix Unit</th>
+                    <th>Quantite</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for l in livres %}
+                  <tr>
+                    <td>{{ l.title }}</td>
+                    <td>{{ l.isbn }}</td>
+                    <td>{{ l.language }}</td>
+                    <td>{{ l.publication_date }}</td>
+                    <td>{{ nb_page }}</td>
+                    <td>{{ l.prix_unitaire }}</td>
+                    <td>{{ l.Qte_stock }}</td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  {% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Livre, Auteur, Domaine, Editeur, Classe, ECUE, Exemplaire, Emprunt, Etudiant
+from .models import * 
 
 # user creation form
 class CustomUserCreationForm(UserCreationForm):
@@ -20,6 +20,11 @@ class AuteurForm(forms.ModelForm):
         model = Auteur
         fields = ('first_name', 'last_name', 'pays')
 
+# LivreAuteur  creation form
+class LivreAuteurForm(forms.ModelForm):
+    class Meta:
+        model = LivreAuteur
+        fields = ['livre', 'auteur'] 
 # domaine creation form
 class DomaineForm(forms.ModelForm):
     class Meta:

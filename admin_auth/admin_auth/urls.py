@@ -37,7 +37,8 @@ urlpatterns = [
     path('create/emprunt/', views.empruntCreate, name='emprunt_creation'),
     path('create/remise/', views.remiseCreate, name='remise_creation'),
     path('create/classe/', views.classeCreate, name='classe_creation'),
-    path('create/ecue/', views.ecueCreate, name='ecue_creation')
+    path('create/ecue/', views.ecueCreate, name='ecue_creation'),
+    path('show/book/', views.show_livre,name='show_livre')
     # path('create/student/', views.studentCreate, name='student_creation')
 ]
 
