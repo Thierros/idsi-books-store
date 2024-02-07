@@ -38,11 +38,11 @@ class Livre(models.Model):
     Qte_stock = models.IntegerField()
     domaine_id = models.ForeignKey(Domaine, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='livre_images/', blank=True, null=True)
-    auteurs = models.ManyToManyField(Auteur, through='LivreAuteur')
+    # auteurs = models.ManyToManyField(Auteur, through='LivreAuteur')
 
-class LivreAuteur(models.Model):
-    livre = models.ForeignKey(Livre, on_delete=models.CASCADE)
-    auteur = models.ForeignKey(Auteur, on_delete=models.CASCADE)
+# class LivreAuteur(models.Model):
+#     livre = models.ForeignKey(Livre, on_delete=models.CASCADE)
+#     auteur = models.ForeignKey(Auteur, on_delete=models.CASCADE)
 
 class Editeur(models.Model):
     editeur_id = models.AutoField(primary_key=True)

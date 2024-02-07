@@ -13,6 +13,11 @@ class LivreForm(forms.ModelForm):
     class Meta:
         model = Livre
         fields = ('title', 'isbn', 'publication_date', 'language', 'nb_page', 'prix_unitaire', 'Qte_stock', 'domaine_id', 'image')
+# book update form
+class LivreUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Livre
+        exclude = ['image']  # Exclure le champ 'image' du formulaire
 
 # auteur creation form
 class AuteurForm(forms.ModelForm):
@@ -21,10 +26,11 @@ class AuteurForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'pays')
 
 # LivreAuteur  creation form
-class LivreAuteurForm(forms.ModelForm):
-    class Meta:
-        model = LivreAuteur
-        fields = ['livre', 'auteur'] 
+# class LivreAuteurForm(forms.ModelForm):
+#     class Meta:
+#         model = LivreAuteur
+#         fields = ['livre', 'auteur']
+
 # domaine creation form
 class DomaineForm(forms.ModelForm):
     class Meta:

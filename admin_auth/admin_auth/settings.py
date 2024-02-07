@@ -139,6 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'auth_app.CustomUser'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.110.51']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '192.168.110.51']
 
 

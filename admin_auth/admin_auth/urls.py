@@ -38,7 +38,10 @@ urlpatterns = [
     path('create/remise/', views.remiseCreate, name='remise_creation'),
     path('create/classe/', views.classeCreate, name='classe_creation'),
     path('create/ecue/', views.ecueCreate, name='ecue_creation'),
-    path('show/book/', views.show_livre,name='show_livre')
+    path('update/book/<int:pk>', views.book_update, name='book_update'),
+    path('delete/book/<int:pk>', views.book_delete, name='book_delete'),
+    path('show/book/', views.show_livre,name='show_livre'),
+    path('show/exemplaire/', views.show_exemplaire,name='show_exemplaire')
     # path('create/student/', views.studentCreate, name='student_creation')
 ]
 

@@ -12,7 +12,7 @@
       <h1>Data Tables</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item">Tables</li>
           <li class="breadcrumb-item active">Data</li>
         </ol>
@@ -22,46 +22,159 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
             <!-- livres -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Liste des Livres</h5>
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>
-                      <b>Titre</b>
-                    </th>
-                    <th>ISBN</th>
-                    <th>Langue</th>
-                    <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
-                    <th>Nb pages</th>
-                    <th>Prix Unit</th>
-                    <th>Quantite</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for l in livres %}
-                  <tr>
-                    <td>{{ l.title }}</td>
-                    <td>{{ l.isbn }}</td>
-                    <td>{{ l.language }}</td>
-                    <td>{{ l.publication_date }}</td>
-                    <td>{{ nb_page }}</td>
-                    <td>{{ l.prix_unitaire }}</td>
-                    <td>{{ l.Qte_stock }}</td>
-                  </tr>
-                  {% endfor %}
-                  
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+            {% if model_name == 'book' %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Liste des Livres</h5>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                        <tr>
+                            <th>
+                            <b>Titre</b>
+                            </th>
+                            <th>ISBN</th>
+                            <th>Langue</th>
+                            <th data-type="date" data-format="YYYY/DD/MM">Date Ajout</th>
+                            <th>Nb pages</th>
+                            <th>Cout(FCFA)</th>
+                            <th>Quantite</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for l in livres %}
+                            <tr>
+                                <td>{{ l.title }}</td>
+                                <td>{{ l.isbn }}</td>
+                                <td>{{ l.language }}</td>
+                                <td>{{ l.publication_date }}</td>
+                                <td>{{ l.nb_page }}</td>
+                                <td>{{ l.prix_unitaire }}</td>
+                                <td>{{ l.Qte_stock }}</td>
+                                <td>
+                                    <a href="{% url 'book_update' pk=l.livre_id %}" class="btn btn-primary"><i class="bi-recycle"></i></a>
+                                    <a href="{% url 'book_delete' pk=l.livre_id %}" class="btn btn-danger"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi-trash-fill"></i>
+                                </a>
+                                </td>
+                            </tr>
 
-            </div>
-          </div>
 
+                                        <!-- modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <p>Voulez-vous vraiment supprimer "{{ l.title }}" ?</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <form method="post" action="{% url 'book_delete' pk=l.livre_id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+
+                    </div>
+                </div>
+
+            <!-- exemplaire -->
+            {% elif model_name == 'exemplaire' %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Liste des Exemplaires</h5>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                        <tr>
+                            <th>
+                            <b>Livre</b>
+                            </th>
+                            <th>Editeur</th>
+                            <th>Numero Exemplaire</th>
+                            <th>Numero Edition</th>
+                            <th>Etat</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for e in exemplaires %}
+                            <tr>
+                                <td>{{ e.livre_id.title }}</td>
+                                <td>{{ e.editeur_id.editeur_name }}</td>
+                                <td>{{ e.exemplaire_number }}</td>
+                                <td>{{ e.edition_number }}</td>
+                                <td>{{ e.etat }}</td>
+                                <td>
+                                {% if e.disponible %}
+                                    <span class="badge bg-success">Disponible</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Non disponible</span>
+                                {% endif %}
+                                
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-primary"><i class="bi-recycle"></i></a>
+                                    <a href="#" class="btn btn-danger"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi-trash-fill"></i>
+                                </a>
+                                </td>
+                            </tr>
+
+
+                    <!-- modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <p>Voulez-vous vraiment  supprimer l'exemplaire "{{ e.exemplaire_id }}" ?</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <form method="post" action="{% url 'book_delete' pk=e.exemplaire_id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+
+                    </div>
+                </div>
+            {%  endif %}
         </div>
       </div>
     </section>

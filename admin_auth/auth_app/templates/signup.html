@@ -31,7 +31,7 @@
                   <form method="POST" class="row g-3 needs-validation" novalidate>
                     {% csrf_token %}
 
-                    {% for error in field.errors %}
+                    {% for error in form.errors %}
                       <p style="color: red;">{{ error }}</p>
                     {% endfor %}
 
@@ -86,14 +86,14 @@
     
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" name="is_student" type="checkbox" value="" id="id_is_student" required>
+                        <input class="form-check-input" name="is_student" type="checkbox" value="" id="id_is_student" >
                         <label class="form-check-label" for="id_is_student">Is student:</label>
                       </div>
                     </div>
     
                     <div class="col-12">
                         <div class="form-check">
-                          <input class="form-check-input" name="is_teacher" type="checkbox" value="" id="id_is_teacher" required>
+                          <input class="form-check-input" name="is_teacher" type="checkbox" value="" id="id_is_teacher" >
                           <label class="form-check-label" for="id_is_teacher">Is teacher:</label>
                         </div>
                       </div>

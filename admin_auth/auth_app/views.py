@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login,  logout
 from django.contrib.auth.decorators import login_required
@@ -38,11 +38,12 @@ def signup(request):
             login(request, user)
             return redirect('/')
         else:
-            # print(form)
+            # print("------------", form)
+            print(form.errors)
             return render(request, 'signup.html', {'form': form})
     else:
         form = CustomUserCreationForm()
-        # print("form else:", form)
+        print("form else:", form)
         return render(request, 'signup.html', {'form': form})
 
 # signout or logout
@@ -229,7 +230,40 @@ def create_livre_auteur(request):
 
 # show_livre
 def show_livre(request):
-    model_name = 'livre'
+    model_name = 'book'
     livres = Livre.objects.all()
-    contexte = {'model':model_name, 'livres': livres}
+    contexte = {'model_name':model_name, 'livres': livres}
     return render(request, 'table_data.html', contexte)
+
+# show_exemplaire
+def show_exemplaire(request):
+    model_name = 'exemplaire'
+    exemplaires = Exemplaire.objects.all()
+    contexte = {'model_name':model_name, 'exemplaires': exemplaires}
+    return render(request, 'table_data.html', contexte)
+
+
+# -----------------------------------------------------------
+def book_update(request, pk):
+    model_name = 'book'
+    domaine = Domaine.objects.all()
+    livre = get_object_or_404(Livre, pk=pk)
+    if request.method == 'POST':
+        form = LivreUpdateForm(request.POST, instance=livre)
+        if form.is_valid():
+            form.save()
+            livres = Livre.objects.all()
+            contexte = {'model':model_name, 'livres': livres}
+            return render(request, 'table_data.html', contexte)
+            # return redirect('/')  # Rediriger vers une page de succès
+    else:
+        form = LivreUpdateForm(instance=livre)
+    return render(request, 'form_update.html', {'pk':pk,'model_name':model_name,'form': form, 'domaine':domaine})
+
+def book_delete(request, pk):
+    livre = get_object_or_404(Livre, pk=pk)
+    if request.method == 'POST':
+        livre.delete()
+        return redirect('/')  # Rediriger vers une page de succès
+    else:
+        return render(request, 'confirm_delete.html', {'livre': livre})
