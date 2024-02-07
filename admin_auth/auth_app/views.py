@@ -36,6 +36,8 @@ def signup(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
+            # if user.is_sta:
+            #     return redirect('/espace_etudiant/')
             return redirect('/')
         else:
             # print("------------", form)
@@ -218,15 +220,15 @@ def ecueCreate(request):
     return render(request, 'form_creation.html', {'form': form, 'model_name': model_name, 'classe': classe_data})
 
 # create livre auteur
-def create_livre_auteur(request):
-    if request.method == 'POST':
-        form = LivreAuteurForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('some-success-url')
-    else:
-        form = LivreAuteurForm()
-    return render(request, 'template.html', {'form': form})
+# def create_livre_auteur(request):
+#     if request.method == 'POST':
+#         form = LivreAuteurForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('some-success-url')
+#     else:
+#         form = LivreAuteurForm()
+#     return render(request, 'template.html', {'form': form})
 
 # show_livre
 def show_livre(request):
